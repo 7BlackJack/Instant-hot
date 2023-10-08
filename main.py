@@ -62,9 +62,20 @@ class WeiboAPI:
         TimeStamp = self.encrypt(data)
         response = self.send_request("https://api.weibotop.cn/getclosesttime", {"timestamp": TimeStamp})
         time_list = list(response)
-        return ''.join(time_list[2: 8])
+        return ''.join(time_list[2: 9])
 
-    def get_data_list(self, time_id):
+    def get_timeid_byname(self, name):
+        """
+        :param name: 用于更具关键字名字获取当前发送该热点关键词的时间timeid
+        :return:  ["1005358","2023-10-06 09:20:10.0","9"]
+        """
+        enc_name = self.encrypt(name)
+        response = self.send_request("https://api.weibotop.cn/gettimeidbyname", {"name": enc_name})
+        print(response)
+        time_list = list(response)
+        return ''.join(time_list[2: 9])
+
+    def get_all_data_list(self, time_id):
         '''
         :param time_id: 根据AES加密后的 time_id 来进行 那一个时刻的热点列表查询
         :return: 返回解密后的热点列表
@@ -75,12 +86,13 @@ class WeiboAPI:
 
 if __name__ == "__main__":
     api = WeiboAPI()
-    search_list = api.get_search_list('py')
-    print(search_list)
-    enc_params_data = api.get_getrankhistory_name('挖呀挖黄老师5场直播销售额超百万')
-    print(enc_params_data)
-    exit()
-    time_id = api.get_time_id('2023-09-01T14:58:18')
+    name_time_id = api.get_timeid_byname('gidle英文首专')
+
+    # search_list = api.get_search_list('p')
+    # # print(search_list)
+    # enc_params_data = api.get_getrankhistory_name('挖呀挖黄老师5场直播销售额超百万')
+    # print(enc_params_data)  # 2023-10-06 09:20:10.0
+    time_id = api.get_time_id('2023-10-06 09:20:10')
     print(time_id)
-    data_list = api.get_data_list(time_id)
+    data_list = api.get_all_data_list(time_id)
     print(data_list)
