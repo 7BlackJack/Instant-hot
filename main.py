@@ -65,6 +65,10 @@ class WeiboAPI:
         return ''.join(time_list[2: 8])
 
     def get_data_list(self, time_id):
+        '''
+        :param time_id: 根据AES加密后的 time_id 来进行 那一个时刻的热点列表查询
+        :return: 返回解密后的热点列表
+        '''
         encrypt_time_id = self.encrypt(time_id)
         encrypted_text = self.send_request("https://api.weibotop.cn/currentitems", {"timeid": encrypt_time_id})
         return self.decrypt(encrypted_text)
