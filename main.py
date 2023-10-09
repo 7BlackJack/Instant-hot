@@ -76,7 +76,6 @@ class WeiboAPI:
         print(response)
         time_list = list(response)
         return ''.join(time_list[2: 9])
-
     # 获取某一时间id 所有数据列表
     def get_all_data_list(self, time_id):
         '''
