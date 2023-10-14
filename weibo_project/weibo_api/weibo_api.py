@@ -121,5 +121,5 @@ if __name__ == "__main__":
     # print(enc_params_data)  # 2023-10-06 09:20:10.0
     time_id = api.get_time_id('2023-10-06 09:20:10')
     print(time_id)
-    data_list = api.get_all_data_list(name_time_id)
-    print(data_list)
+    # data_list = api.get_all_data_list(name_time_id)
+    # print(data_list)
