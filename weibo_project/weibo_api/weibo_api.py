@@ -113,13 +113,13 @@ class WeiboAPI:
 
 if __name__ == "__main__":
     api = WeiboAPI()
-    name_time_id = api.get_time_id_by_name('gidle英文首专')
-    print(name_time_id)
+    # name_time_id = api.get_time_id_by_name('gidle英文首专')
+    # print(name_time_id)
     # search_list = api.get_search_list('p')
     # print(search_list)
     # enc_params_data = api.get_rank_history('挖呀挖黄老师5场直播销售额超百万')
     # print(enc_params_data)  # 2023-10-06 09:20:10.0
-    time_id = api.get_time_id('2023-10-06 09:20:10')
+    time_id = api.get_time_id('2023-10-23 09:20:10')
     print(time_id)
-    # data_list = api.get_all_data_list(name_time_id)
-    # print(data_list)
+    data_list = api.get_all_data_list(time_id)
+    print(data_list)
