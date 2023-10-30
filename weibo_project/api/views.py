@@ -4,6 +4,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 import logging
 from weibo_api.weibo_api import WeiboAPI
+import json
 
 # 初始化日志
 logger = logging.getLogger(__name__)
@@ -22,11 +23,13 @@ def search_list(request, query):
     """
     try:
         result = api.get_search_list(query)
-        logger.info(f"对查询 {query} 的搜索列表结果：{result}")
-        return JsonResponse({"data": result}, status=status.HTTP_200_OK)
+        parsed_result = json.loads(result)
+        print(parsed_result)
+        # logger.info(f"对查询 {query} 的搜索列表结果：{parsed_result}")
+        return JsonResponse({"data": parsed_result})
     except Exception as e:
         logger.error(f"发生错误：{str(e)}")
-        return Response({"error": "出了点问题"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        return Response({"error": "出了点问题"})
 
 
 @api_view(['GET'])
@@ -67,8 +70,10 @@ def all_data_list(request, time_id):
     """
     根据时间ID 获取对应的所有热点数据列表，最多【50】
     :param request:
-    :param time_id: 1005358
+        :param time_id: 1005358
     :return:
     """
+    print(time_id)
     result = api.get_all_data_list(time_id)
+    # print(result)
     return JsonResponse({"data": result})

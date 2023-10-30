@@ -107,7 +107,7 @@ class WeiboAPI:
         :param time_id: 热点时间ID
         :return: 返回指定热点时间ID对应的所有热点数据列表
         """
-        time_id = time_id[2: 9]
+        # time_id = time_id[2: 9]
         return self.send_request("currentitems", {"timeid": time_id})
 
 
