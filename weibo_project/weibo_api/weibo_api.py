@@ -1,3 +1,5 @@
+import time
+
 import requests
 import base64
 import json
@@ -61,8 +63,11 @@ class WeiboAPI:
         :return: 返回解密后或（未加密原文）的响应数据
         """
         encrypted_params = {k: self.encrypt(v) for k, v in params.items()}
+        print(encrypted_params)
         try:
+            start = time .time()
             response = requests.get(f"{self.BASE_URL}{endpoint}", headers=self.headers, params=encrypted_params)
+            print(f'請求時間: {time.time() - start}')
             response.raise_for_status()
             return self.decrypt(response.text) if need_decrypt else response.text
         except requests.RequestException as e:
@@ -117,9 +122,15 @@ if __name__ == "__main__":
     # print(name_time_id)
     # search_list = api.get_search_list('p')
     # print(search_list)
-    # enc_params_data = api.get_rank_history('挖呀挖黄老师5场直播销售额超百万')
+    enc_params_data = api.get_rank_history('16岁溺水少年手写感谢信赠民警')
+    print(enc_params_data)  # 2023-10-06 09:20:10.0
+    enc_params_data = api.get_rank_history('李克强同志遗体11月2日火化')
     # print(enc_params_data)  # 2023-10-06 09:20:10.0
-    time_id = api.get_time_id('2023-10-23 09:20:10')
-    print(time_id)
-    data_list = api.get_all_data_list(time_id)
-    print(data_list)
+    enc_params_data = api.get_rank_history('神十六航天员回地球')
+    # print(enc_params_data)  # 2023-10-06 09:20:10.0
+    # print(append_data)
+
+    # time_id = api.get_time_id('2023-10-04 09:20:10')
+    # print(time_id)
+    # data_list = api.get_all_data_list(time_id)
+    # print(data_list)
