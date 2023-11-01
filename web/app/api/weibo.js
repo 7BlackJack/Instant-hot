@@ -8,9 +8,17 @@ export const searchList = async (query) => {
   return response.data;
 }
 
-export const rankHistory = async (text) => {
-  const response = await axios.get(`${BASE_URL}/rank_history/${text}`);
-  return response.data;
+export const rankHistory = async (texts) => {
+  // 过滤掉空字符串，只为非空的主题名称发送请求
+  const validTexts = texts.filter(text => text !== "");
+
+  const dataPromises = validTexts.map(text => 
+    axios.get(`${BASE_URL}/rank_history/${text}`)
+  );
+
+  const responses = await Promise.all(dataPromises);
+
+  return responses.map(response => response.data);
 }
 
 export const getTimeId = async (timestamp) => {
