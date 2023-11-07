@@ -26,10 +26,10 @@ def search_list(request, query):
         parsed_result = json.loads(result)
         print(parsed_result)
         # logger.info(f"对查询 {query} 的搜索列表结果：{parsed_result}")
-        return JsonResponse({"data": parsed_result})
+        return JsonResponse({"data": parsed_result}, status=status.HTTP_200_OK)
     except Exception as e:
         logger.error(f"发生错误：{str(e)}")
-        return Response({"error": "出了点问题"})
+        return Response({"error": "An issue occurred"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 @api_view(['GET'])
@@ -40,8 +40,13 @@ def rank_history(request, text):
     :param text: 挖呀挖黄老师5场直播销售额超百万
     :return:
     """
-    result = api.get_rank_history(text)
-    return JsonResponse({"data": result})
+    try:
+        result = api.get_rank_history(text)
+        print(result)
+        return JsonResponse({"data": result}, status=status.HTTP_200_OK)
+    except Exception as e:
+        logger.error(f"An error occurred: {str(e)}")
+        return Response({"error": "An issue occurred"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 @api_view(['GET'])
 def time_id(request, timestamp):
@@ -51,8 +56,13 @@ def time_id(request, timestamp):
     :param timestamp: 2023-10-06 09:20:10
     :return:
     """
-    result = api.get_time_id(timestamp)
-    return JsonResponse({"data": result})
+    try:
+        result = api.get_time_id(timestamp)
+        return JsonResponse({"data": result}, status=status.HTTP_200_OK)
+    except Exception as e:
+        logger.error(f"An error occurred: {str(e)}")
+        return Response({"error": "An issue occurred"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
 
 @api_view(['GET'])
 def time_id_by_name(request, name):
@@ -62,8 +72,13 @@ def time_id_by_name(request, name):
     :param name: gidle英文首专
     :return:
     """
-    result = api.get_time_id_by_name(name)
-    return JsonResponse({"data": result})
+    try:
+        result = api.get_time_id_by_name(name)
+        return JsonResponse({"data": result}, status=status.HTTP_200_OK)
+    except Exception as e:
+        logger.error(f"An error occurred: {str(e)}")
+        return Response({"error": "An issue occurred"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
 
 @api_view(['GET'])
 def all_data_list(request, time_id):
@@ -73,7 +88,11 @@ def all_data_list(request, time_id):
         :param time_id: 1005358
     :return:
     """
-    print(time_id)
-    result = api.get_all_data_list(time_id)
-    # print(result)
-    return JsonResponse({"data": result})
+    try:
+        print(time_id)
+        result = api.get_all_data_list(time_id)
+        print(result)
+        return JsonResponse({"data": result}, status=status.HTTP_200_OK)
+    except Exception as e:
+        logger.error(f"An error occurred: {str(e)}")
+        return Response({"error": "An issue occurred"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

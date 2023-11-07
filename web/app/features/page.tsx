@@ -2,10 +2,12 @@
 import React, { useState, FC } from 'react';
 import DashboardContent from './dashboard/dashBoard';
 import HotTopics from './hotspot/hotspot';
+import login from './login/login'
 
 const COMPONENTS_MAP: { [key: string]: FC } = {
   'Dashboard': DashboardContent,
   'Hotspot': HotTopics,
+  'login': login
   // ...其他组件可以在此处添加
 };
 
@@ -30,7 +32,7 @@ const SidebarNav: FC<SidebarNavProps> = ({ items, activeItem, onActiveItemChange
 );
 
 const Dashboard: FC = () => {
-  const mainNavItems = ['Dashboard', 'Hotspot', 'Team', 'Projects', 'Calendar', 'Documents', 'Reports'];
+  const mainNavItems = ['Dashboard', 'Hotspot', 'login', 'Team', 'Projects', 'Calendar', 'Documents', 'Reports'];
   const teamNavItems = ['Heroicons', 'Tailwind Labs', 'Workcation'];
 
   const [activeItem, setActiveItem] = useState('Dashboard');

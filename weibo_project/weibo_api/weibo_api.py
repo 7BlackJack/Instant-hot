@@ -67,7 +67,7 @@ class WeiboAPI:
         try:
             start = time .time()
             response = requests.get(f"{self.BASE_URL}{endpoint}", headers=self.headers, params=encrypted_params)
-            print(f'請求時間: {time.time() - start}')
+            print(f'请求时间: {time.time() - start}')
             response.raise_for_status()
             return self.decrypt(response.text) if need_decrypt else response.text
         except requests.RequestException as e:

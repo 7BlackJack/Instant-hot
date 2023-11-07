@@ -2,11 +2,13 @@ import axios from 'axios';
 
 const BASE_URL = 'http://127.0.0.1:8000/api'; // 这里要填写你的后端API地址
 
+
 export const searchList = async (query) => {
   const response = await axios.get(`${BASE_URL}/search_list/${query}`);
   console.log(response.data);
   return response.data;
 }
+
 
 export const rankHistory = async (texts) => {
   // 过滤掉空字符串，只为非空的主题名称发送请求
@@ -20,6 +22,7 @@ export const rankHistory = async (texts) => {
 
   return responses.map(response => response.data);
 }
+
 
 export const getTimeId = async (timestamp) => {
   // 将ISO格式的字符串转换为Date对象
@@ -40,15 +43,18 @@ export const getTimeId = async (timestamp) => {
   return response.data;
 }
 
+
 export const getTimeIdByName = async (name) => {
   const response = await axios.get(`${BASE_URL}/time_id_by_name/${name}`);
   return response.data;
 }
 
+
 export const getAllDataList = async (time_id) => {
   const response = await axios.get(`${BASE_URL}/all_data_list/${time_id}`);
   return response.data;
 }
+
 
 
 
