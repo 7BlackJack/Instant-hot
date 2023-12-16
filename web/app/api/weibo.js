@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://127.0.0.1:8000/api'; // 这里要填写你的后端API地址
+const BASE_URL = 'http://localhost:3000/api'; // 这里要填写你的后端API地址
 
 
 export const searchList = async (query) => {
