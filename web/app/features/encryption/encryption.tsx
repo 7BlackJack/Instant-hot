@@ -4,19 +4,20 @@ import forge from "node-forge";
 
 // 加密和解密的模式和填充选项
 const modes = {
-  CBC: CryptoJS.mode.CBC,
-  CFB: CryptoJS.mode.CFB,
-  CTR: CryptoJS.mode.CTR,
-  ECB: CryptoJS.mode.ECB,
-  OFB: CryptoJS.mode.OFB
+	CBC: CryptoJS.mode.CBC,
+	CFB: CryptoJS.mode.CFB,
+	CTR: CryptoJS.mode.CTR,
+	ECB: CryptoJS.mode.ECB,
+	OFB: CryptoJS.mode.OFB,
+
 };
 const paddings = {
-  Pkcs7: CryptoJS.pad.Pkcs7,
-  AnsiX923: CryptoJS.pad.AnsiX923,
-  Iso10126: CryptoJS.pad.Iso10126,
-  Iso97971: CryptoJS.pad.Iso97971,
-  ZeroPadding: CryptoJS.pad.ZeroPadding,
-  NoPadding: CryptoJS.pad.NoPadding
+	Pkcs7: CryptoJS.pad.Pkcs7,
+	AnsiX923: CryptoJS.pad.AnsiX923,
+	Iso10126: CryptoJS.pad.Iso10126,
+	Iso97971: CryptoJS.pad.Iso97971,
+	ZeroPadding: CryptoJS.pad.ZeroPadding,
+	NoPadding: CryptoJS.pad.NoPadding,
 };
 
 const encryption: React.FC = () => {
@@ -26,7 +27,7 @@ const encryption: React.FC = () => {
 	const [modeSelected, setModeSelected] = useState<string>("CBC");
 	const [paddingSelected, setPaddingSelected] = useState<string>("Pkcs7");
 	const [inputText, setInputText] = useState<string>("");
-	const [key, setKey] = useState<string>("");
+	const [key, setKey] = useState<string>("b");
 	const [iv, setIv] = useState<string>("");
 	const [rsaKey, setRsaKey] = useState<forge.pki.rsa.KeyPair | null>(null);
 	const [output, setOutput] = useState<string>("");
@@ -180,6 +181,8 @@ const encryption: React.FC = () => {
 						<option value="MD5">MD5</option>
 						<option value="SHA1">SHA-1</option>
 						<option value="SHA256">SHA-256</option>
+						<option value="SHA512">SHA-512</option>
+						<option value="SHA3">Sha3</option>
 						{/* 其他哈希算法 */}
 					</select>
 				</div>
