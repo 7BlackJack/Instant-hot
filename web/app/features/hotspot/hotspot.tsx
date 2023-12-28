@@ -89,7 +89,7 @@ const HotTopics: React.FC = () => {
 	}, [startDate, searchResults]);
 
 	return (
-		<div className="bg-white p-6 rounded-lg shadow-md w-3/4 mx-auto mt-10">
+		<div className="bg-white p-6 rounded-lg shadow-md w-4/5 mx-auto mt-10">
 			<div className="flex items-center justify-between mb-6">
 				<div className="flex items-center">
 					<img

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CryptoJS from "crypto-js";
 import forge from "node-forge";
 
@@ -9,7 +9,6 @@ const modes = {
 	CTR: CryptoJS.mode.CTR,
 	ECB: CryptoJS.mode.ECB,
 	OFB: CryptoJS.mode.OFB,
-
 };
 const paddings = {
 	Pkcs7: CryptoJS.pad.Pkcs7,
@@ -32,12 +31,19 @@ const encryption: React.FC = () => {
 	const [rsaKey, setRsaKey] = useState<forge.pki.rsa.KeyPair | null>(null);
 	const [output, setOutput] = useState<string>("");
 
-	// RSA密钥生成
-	const generateRSAKeys = () => {
-		const generatedKeys = forge.pki.rsa.generateKeyPair({ bits: 2048 });
-		setRsaKey(generatedKeys);
-	};
+	useEffect(() => {
+		generateRSAKeys();
+	}, []);
 
+	// RSA密钥生成  这里是在客户端演示的例子，实际RSA的密钥要放在服务端
+	const generateRSAKeys = () => {
+		try {
+			const generatedKeys = forge.pki.rsa.generateKeyPair({ bits: 2048 });
+			setRsaKey(generatedKeys);
+		} catch (error) {
+			console.error("RSA密钥生成错误:", error);
+		}
+	};
 	// 加密函数
 	const handleEncryptClick = () => {
 		if (method === "AES" || method === "DES") {

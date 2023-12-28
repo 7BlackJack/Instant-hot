@@ -4,6 +4,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 import logging
 from weibo_api.weibo_api import WeiboAPI
+from fanyi_api.fanyi_api import Translator
 import json
 
 # 初始化日志
@@ -11,6 +12,9 @@ logger = logging.getLogger(__name__)
 
 # 初始化WeiboAPI
 api = WeiboAPI()
+
+# 初始化 Translator 实例
+translator = Translator()
 
 
 @api_view(['GET'])
@@ -95,4 +99,19 @@ def all_data_list(request, time_id):
         return JsonResponse({"data": result}, status=status.HTTP_200_OK)
     except Exception as e:
         logger.error(f"An error occurred: {str(e)}")
+        return Response({"error": "An issue occurred"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@api_view(['POST'])
+def translate(request):
+    try:
+        # 从 POST 请求的 body 中获取 text
+        query = request.data.get('text')
+        # 使用翻译器翻译查询字符串
+        translated_query = translator.translate(query)
+        # 解析字符串化的 JSON 对象
+        translated_data = json.loads(translated_query)
+        return JsonResponse(translated_data, status=status.HTTP_200_OK)
+    except Exception as e:
+        logger.error(f"发生错误：{str(e)}")
         return Response({"error": "An issue occurred"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

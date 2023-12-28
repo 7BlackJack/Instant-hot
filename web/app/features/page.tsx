@@ -4,11 +4,13 @@ import DashboardContent from "./dashboard/dashBoard";
 import HotTopics from "./hotspot/hotspot";
 import base64_convert from "./base64.convert/base64.convert";
 import EncryptionForm from "./encryption/encryption";
+import Fanyi from "./fanyi/fanyi";
 
 // 添加 组件页面
 const COMPONENTS_MAP: { [key: string]: FC } = {
 	Dashboard: DashboardContent,
 	即时热点: HotTopics,
+	翻译吧: Fanyi,
 	base64: base64_convert,
 	"加/解密": EncryptionForm,
 	// ...其他组件可以在此处添加
@@ -46,18 +48,13 @@ const Dashboard: FC = () => {
 	const mainNavItems = [
 		"Dashboard",
 		"即时热点",
+		"翻译吧",
 		"base64",
- 		'加/解密',
-		"login",
-		"Team",
-		"Projects",
-		"Calendar",
-		"Documents",
-		"Reports",
+		"加/解密",
 	];
 	// const teamNavItems = ["Heroicons", "Tailwind Labs", "Workcation"];
 
-	const [activeItem, setActiveItem] = useState('base64');
+	const [activeItem, setActiveItem] = useState("翻译吧");
 	const ActiveComponent = COMPONENTS_MAP[activeItem] || null;
 
 	return (
